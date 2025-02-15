@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os/exec"
+)
 
 type CommitType string
 
@@ -24,7 +27,21 @@ type Commit struct {
 	description string
 }
 
-func main() {
+func isGitInstalled() bool {
+	cmd := exec.Command("git", "-v")
+	_, err := cmd.Output()
+	if err != nil {
+		return false
+	}
+	return true
+}
 
-	fmt.Println("Consign is a git commit helper")
+func main() {
+	if isGitInstalled() {
+		fmt.Println(
+			`git is not installed on your computer 
+go to https://git-scm.com/book/en/v2/Getting-Started-Installing-Git`)
+	}
+	fmt.Println("Consign is a git commit message helper")
+
 }
