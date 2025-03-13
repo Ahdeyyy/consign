@@ -56,10 +56,8 @@ func GitCommit(commit Commit) {
 		cmd = exec.Command("git", "commit", "-m", title)
 	} else {
 
-		cmd = exec.Command("git", "-m", title, "-m", commit.description)
+		cmd = exec.Command("git", "commit", "-m", title, "-m", commit.description)
 	}
-
-	log.Println(cmd.String())
 
 	out, err := cmd.Output()
 	if err != nil {
